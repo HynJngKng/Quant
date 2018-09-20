@@ -6,7 +6,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 
 
-def upload_google_api(filename, folder_id):
+def upload_google_api(file_name, file_path, folder_id):
     try :
         import argparse
         flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -25,15 +25,15 @@ def upload_google_api(filename, folder_id):
 
     DRIVE = build('drive', 'v3', http=creds.authorize(Http()))
 
-    FILES = (('hello.txt'),)
-    folder_id = '1DDMvvmZmYhXyvX2mBZ5F2SE2t5IJr3DE'  # 폴더코드
+    FILES = ((file_name),)
+    folder_id = folder_id  # 폴더코드
 
     for file_title in FILES :
         file_name = file_title
         metadata = {'name': file_name, 'parents' : [folder_id],
                     'mimeType': None
                     }
-        media = str("data\\" + file_name)
+        media = str(file_path + "\\" + file_name)
         print(media)
         res = DRIVE.files().create(body=metadata, media_body=media).execute()
         if res:
@@ -41,4 +41,4 @@ def upload_google_api(filename, folder_id):
 
 
 if __name__ == '__main__':
-    upload_google_api('hello.txt', '1DDMvvmZmYhXyvX2mBZ5F2SE2t5IJr3DE')
+    upload_google_api('hello.txt', "C:\Projects\quant\data", '1DDMvvmZmYhXyvX2mBZ5F2SE2t5IJr3DE')
