@@ -42,3 +42,8 @@ def upload_google_api(file_name, file_path, folder_id):
 
 if __name__ == '__main__':
     upload_google_api('hello.txt', "C:\Projects\quant\data", '1DDMvvmZmYhXyvX2mBZ5F2SE2t5IJr3DE')
+
+    # from Upload_google_drive import upload_google_api
+    # import후에
+    # upload_google_api(file_name, file_path, folder_id)
+    # 위와같이 입력하여 사용
